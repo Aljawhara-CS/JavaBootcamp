@@ -1,0 +1,160 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args)
+    {
+        // Author by Aljawhara Alsultan
+
+        Scanner obj= new Scanner(System.in);
+
+
+        String Role;
+        int num1;//= 125; //  value of the first variable
+        int num2;//= 24;
+        int num3;
+        int result_sum ;
+        int result_subtract;
+        int result_multiply;
+        int result_divide;
+        int result_remainder;
+        String giving;
+        int EnteredNum;
+        String day;
+
+
+
+        System.out.println("1.Write a Java program to print the sum, multiply, subtract, divide and remainder of two numbers");
+
+        System.out.println(" Kindly, Write the First number:");
+        num1 = obj.nextInt();  //  user input
+        System.out.println(" Kindly, Write the second number:");
+        num2 = obj.nextInt();  //  user input
+
+
+         result_sum = num1+num2;                 // sum result
+         result_subtract = num1-num2;         // subtract  result
+         result_multiply=num1*num2;           // multiply result
+         result_divide=num1/num2;            // divide result
+         result_remainder=num1%num2;            // remainder result
+
+
+        System.out.println(" The sum operation is:"+num1 +"+"+ num2 +"="+ result_sum);
+        System.out.println(" The subtract operation is:"+num1 +"-"+ num2 +"="+ result_subtract);
+        System.out.println(" The divide operation is:"+num1 +"/"+ num2 +"="+ result_divide);
+        System.out.println (" The multiply operation is:"+num1 +"*"+ num2 +"="+result_multiply );
+        System.out.println (" The remainder operation is:"+num1 +" mod "+ num2 +"="+result_remainder );
+
+        System.out.println("++++++++++++++++++++++++");
+
+
+        System.out.println("2.Write a Java program to convert a given string into lowercase");
+        giving="THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG";
+
+        System.out.println(" convert  string into lowercase :"+giving.toLowerCase());
+
+
+        System.out.println("++++++++++++++++++++++++");
+        System.out.println("4.Write a Java program to accept a number and check the number is even or not. " +
+                " Prints 1 if the number is even or 0 if the number is odd. (use if-statement)");
+        System.out.println("kindly, Enter Number:");
+        num1 = obj.nextInt();
+
+        if(num1% 2==0)
+              System.out.println("The number that you entered is even,1 ");
+        else  System.out.println("The number that you entered is Odd,0 ");
+
+
+
+        System.out.println("++++++++++++++++++++++++");
+        System.out.println("5.Write a program that checks the role of the user");
+        System.out.println("Enter your Role:");
+        Role = obj.nextLine();
+
+        if (Role.equals("admin"))
+            System.out.println("welcome " + Role);
+        else if (Role.equals( "superuser"))
+            System.out.println("welcome " + Role);
+        else if (Role.equals("user"))
+            System.out.println("welcome " + Role);
+
+
+        System.out.println("++++++++++++++++++++++++");
+        System.out.println("6.Write a Java program to calculate the sum of two integers and return true if the sum is equal to a third integer.");
+        System.out.println("kindly, Enter num1:");
+        num1 = obj.nextInt();  //  user input
+
+        System.out.println("kindly, Enter num2:");
+        num2 = obj.nextInt();  //  user input
+
+        System.out.println("kindly, Enter num3:");
+        num3 = obj.nextInt();  //  user input
+        result_sum = num1+num2;
+
+        if (result_sum==num3)
+            System.out.println("True");
+
+
+
+
+
+        System.out.println("++++++++++++++++++++++++");
+        System.out.println("7.Take three numbers from the user and print the greatest number");
+
+        System.out.println("Enter  num1 : ");
+        num1 = obj.nextInt();  //  user input
+
+        System.out.println("Enter  num2 : ");
+        num2 = obj.nextInt();  //  user input
+
+        System.out.println("Enter  num3 : ");
+        num3 = obj.nextInt();  //  user input
+
+
+        if (num1 > num2)
+        {   if (num1 > num3)
+                  System.out.println("The greatest entered numbers  is " + num1);}
+
+        if (num2 > num1)
+        { if (num2 > num3)
+                System.out.println("The greatest entered numbers  is" + num2);}
+
+        if (num3 > num1)
+        {  if (num3 > num2)
+                System.out.println("The greatest entered numbers is : " + num3);}
+
+
+
+
+
+        System.out.println("++++++++++++++++++++++++");
+        System.out.println("8.Write a Java program that keeps a number from the user and generates an integer between 1 and 7 and displays the name of the weekday.");
+
+        System.out.println("kindly, write number between 1-7 :");
+        EnteredNum= obj.nextInt();
+
+        if (EnteredNum==1)
+        { day="Sunday";      System.out.println(day);}
+        else if(EnteredNum==2)
+        { day="Monday";      System.out.println(day);}
+        else if(EnteredNum==3)
+        { day="Thursday";      System.out.println(day);}
+        else if(EnteredNum==4)
+        { day="Wednesday";      System.out.println(day);}
+        else if(EnteredNum==5)
+        { day="sunday";      System.out.println(day);}
+        else if(EnteredNum==6)
+        { day="Friday";      System.out.println(day);}
+        else if(EnteredNum==7)
+        { day="saturday";      System.out.println(day);}
+        else System.out.println(" Kindly, enter number between 1-7. Thanks");
+
+
+
+
+    }
+
+
+
+    }
+
+
