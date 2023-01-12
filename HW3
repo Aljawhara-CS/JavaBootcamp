@@ -1,0 +1,322 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Scanner;
+
+public class Main {
+
+
+    public static void main(String[] args) {
+
+
+        // author by Aljawhara Alsultan
+        Scanner obj = new Scanner(System.in);
+        int num;
+
+
+        System.out.println("1.Write a Java program to test if the first and the last element of an array of integers are same." +
+                " The length of the array must be greater than or equal to 2");
+        //false
+        int[] array = {50, -20, 0, 30, 40, 60, 10};
+
+        System.out.println(array.length >= 2 && array[0] == array[array.length - 1]);
+
+
+        System.out.println("---------------------------------");
+        System.out.println("2.Write a Java program to find the k largest elements in a given array." +
+                " Elements in the array can be in any order.");
+        //3 largest elements of the said array are: 100 25 17
+
+     /*   int largest;
+        int[] array2 = {1, 4, 17, 7, 25, 3, 100};*/
+
+        Integer[] arr = {1, 4, 17, 7, 25, 3, 100};
+        int numbers = 3;
+
+        System.out.println("Original Array: ");
+        System.out.println(Arrays.toString(arr));
+        
+        System.out.println(numbers + " largest elements of the said array are:");
+        Arrays.sort(arr);
+        for (int i = arr.length-1; (numbers <=numbers) && (numbers !=0)  ; i--)
+        {System.out.print(arr[i] + " ");
+        numbers--;}
+
+        System.out.println("");
+        System.out.println("---------------------------------");
+
+        System.out.println("3.Write a Java program to find the numbers greater than the average of the numbers of a given array.");
+
+       /* Original Array:
+        [1, 4, 17, 7, 25, 3, 100]
+
+        Expected Output:
+        The average of the said array is: 22.0 The numbers in the said array that are greater than the average are: 25 100*/
+
+        int sum = 0;
+        for (int i = 0; i < arr.length; i++) {
+            sum = sum + arr[i];
+        }
+
+        int average = sum / arr.length;
+        System.out.println("The average of the said array is: " + average);
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] > average)
+                System.out.print(arr[i] + " ");
+        }
+
+
+        System.out.println("");
+        System.out.println("---------------------------------");
+        System.out.println("4.Write a Java program to get the larger value between first and last element of an array of integers.");
+
+    /*    Original Array:
+        [20, 30, 40]
+
+        Sample Output:
+        Larger value between first and last element: 40*/
+
+        int[] array4 = {20, 30, 40};
+
+        int first_value = array4[0];
+        int Last_value = array4[array4.length - 1];
+        int Largest;
+        System.out.println("Elements array are:\n" + Arrays.toString(array4));
+
+
+        if (first_value > Last_value) {
+            Largest = first_value;
+            System.out.println("Larger value between first and last element " + Largest);
+
+        } else Largest = Last_value;
+        System.out.println("Larger value between first and last element " + Largest);
+
+
+        System.out.println("---------------------------------");
+        System.out.println("5.Write a Java program to swap the first and last elements of an array and create a new array.");
+
+       /* Original Array:
+        [ 20, 30, 40]
+        Sample Output:
+        New array after swapping the first and last elements: [40, 30, 20]*/
+
+        int new_value_first = Last_value;
+        int new_value_last = first_value;
+        int[] array_new = new int[3];
+
+        array_new[0] = new_value_first;
+
+        for (int i = 1; i < array4.length; i++) {
+            if (i != array4.length - 1)
+                array_new[i] = array4[i];
+            else array_new[i] = new_value_last;
+
+        }
+
+        System.out.println("New array after swapping the first and last elements:\n" + Arrays.toString(array_new));
+
+
+        System.out.println("---------------------------------");
+        System.out.println("6.Write a Java program to find all of the longest word in a given dictionary.");
+
+       /* Example:
+        { "cat", "dog", "red", "is", "am" }
+        Result: "cat", "dog", "red"*/
+
+        String[] array_dic = {"cat", "dog", "red", "is", "am"};
+        //  Arrays.toString(array_dic))
+      /*  for (int i = 0; i < array_dic.length; i++) {
+            System.out.print("" + Arrays.toString(array_dic));
+        }*/
+        ArrayList<String> dic = new ArrayList<String>();
+        ArrayList<String> dicnew = new ArrayList<String>();
+
+
+        dic.add("cat");
+        dic.add("dog");
+        dic.add("red");
+        dic.add("is");
+        dic.add("am");
+
+        for ( int i=0; i<dic.size() ; i++) {
+            for (int j = 0; j < dic.size() ; j++)
+            {
+                if (dic.get(i).length() >= dic.get(j).length())
+                   dicnew.add(dic.get(i));
+                   break;
+            }
+            System.out.println(dic.get(i)+" length is "+dic.get(i).length());
+        }
+
+        System.out.print("{");
+
+        for (int i = 0; i < dicnew.size(); i++) {
+            if (i != dicnew.size() - 1)
+                System.out.print(dicnew.get(i) + ",");
+            else {
+                System.out.println(dicnew.get(i) + "}");
+            }
+
+        }
+/*
+        int longest2 = dic.stream().mapToInt(word -> word.length()).max().orElse(0);
+        System.out.println(longest2); // prints 5*/
+
+
+        System.out.println("---------------------------------");
+        System.out.println("7.Write a menu driven Java program with following option:");
+
+      /*  a. Accept elements of an array
+          b. Display elements of an array
+          c. Search the element within array
+          d. Sort the array the size of the array should be entered by the user.*/
+
+        System.out.println("kindly enter number of the elements of an array \n");
+        num = obj.nextInt();
+        int[] Original_Array7 = new int[num];
+
+        for (int i = 0; i < Original_Array7.length; i++) {
+            System.out.println("kindly enter number \n");
+            num = obj.nextInt();
+            Original_Array7[i] = num;
+        }
+        System.out.println(Arrays.toString(Original_Array7));
+
+
+        mainLoop: while (true) {
+            System.out.println("kindly, enter  one of the  numbers: \n" +
+                    "          1. Display elements of an array \n" +
+                    "          2. Search the element within array \n" +
+                    "          3. Sort the array the size of the array should be entered by the user.");
+            num = obj.nextInt();
+
+
+            switch (num) {
+                case 1:
+                    System.out.println(Arrays.toString(Original_Array7));
+                    break;
+                case 2:
+
+                    System.out.println("kindly, enter number for search");
+                    num = obj.nextInt();
+
+                    for (int i = 0; i < Original_Array7.length; i++) {
+                        if (Original_Array7[i] == num){
+                            System.out.println("Found the number " + num);
+                        break;}
+                        else System.out.println("Not found the number " + num);
+                        break;
+
+                    }
+                break;
+                case 3:
+                    Arrays.sort(Original_Array7);
+                    System.out.println(Arrays.toString(Original_Array7));
+                    break;
+
+                case 4:
+                System.out.println("Program terminated");
+                break mainLoop;
+
+                default:
+                    System.out.println("Wrong choice!!");
+
+            }
+
+        }
+
+
+
+
+            System.out.println("---------------------------------");
+            System.out.println("8. Write a program thats displays the number of occurrences of an element in the array.\n");
+
+      /*  Original Array:
+      [1,1,1,3,3,5]
+      Sample Output:
+      3 occurs 2 times
+      1 occurs 3 times
+      9 occurs 0 time*/
+
+            int[] Original_Array8 = {1, 1, 1, 3, 3, 5};
+            ArrayList<Integer> Duplicated_num = new ArrayList<Integer>();
+
+            System.out.println("Elements array are:\n" + Arrays.toString(Original_Array8));
+
+            for (int i = 0; i < Original_Array8.length; i++) {
+                int count = 0;
+
+                for (int j = 0; j < Original_Array8.length; j++) {
+                    if (Original_Array8[i] == Original_Array8[j])
+                        count++;
+                }
+                Duplicated_num.add(count);
+            }
+
+            System.out.println(" Enter number to see how many time occurrences:");
+            num = obj.nextInt();
+
+            for (int i = 0; i < Original_Array8.length; i++) {
+                if (Original_Array8[i] == num) {
+                    System.out.println(num + " occurs " + Duplicated_num.get(i) + " times");
+                    break;
+                } else System.out.println(num + " occurs 0 time");
+                break;
+            }
+
+
+            System.out.println("---------------------------------");
+            System.out.println("9. Write a program that places the odd elements of an array before the even elements.");
+
+      /*  Original Array:
+      [2,3,40,1,5,9,4,10,7]
+      Sample Output:
+      [3,1,5,9,7,2,40,4,10] */
+
+            int[] Original_Array = {2, 3, 40, 1, 5, 9, 4, 10, 7};
+
+            ArrayList<Integer> even_Array = new ArrayList<Integer>();
+            ArrayList<Integer> odd_Array = new ArrayList<Integer>();
+
+            System.out.println("Elements array are:\n" + Arrays.toString(Original_Array));
+
+
+            for (int i = 0; i < Original_Array.length; i++) {
+                if (Original_Array[i] % 2 == 0)
+                    even_Array.add(Original_Array[i]);
+                else odd_Array.add(Original_Array[i]);
+            }
+
+            odd_Array.addAll(even_Array);
+
+            System.out.print("{");
+            for (int i = 0; i < odd_Array.size(); i++) {
+                if (i != odd_Array.size() - 1)
+                    System.out.print(odd_Array.get(i) + ",");
+                else {
+                    System.out.println(odd_Array.get(i) + "}");
+                }
+
+            }
+
+
+            System.out.println("---------------------------------");
+            System.out.println("10. Write a program that test the equality of two arrays.");
+
+      /*
+          [2,3,6,6,4] [2,3,6,6,4]
+          Sample Output:
+          true
+      */
+
+            int[] array1 = {2, 3, 6, 6, 4};
+            int[] array2 = {2, 3, 6, 6, 4};
+            System.out.println(Arrays.equals(array1, array2));
+
+
+        }
+
+
+    }
+
+
