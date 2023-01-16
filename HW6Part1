@@ -1,0 +1,102 @@
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+
+        try {
+
+            Scanner obj = new Scanner(System.in);
+            int num;
+
+
+            System.out.println("---------------------------------");
+            System.out.println("7.Write a menu driven Java program with following option:");
+
+      /*  a. Accept elements of an array
+          b. Display elements of an array
+          c. Search the element within array
+          d. Sort the array the size of the array should be entered by the user.*/
+
+            System.out.println("kindly enter number of the elements of an array \n");
+            num = obj.nextInt();
+            int[] Original_Array7 = new int[num];
+
+            for (int i = 0; i < Original_Array7.length; i++) {
+                System.out.println("kindly enter number \n");
+                num = obj.nextInt();
+                Original_Array7[i] = num;
+            }
+            System.out.println(Arrays.toString(Original_Array7));
+
+
+            mainLoop:
+            while (true) {
+                System.out.println("kindly, enter  one of the  numbers: \n" +
+                        "          1. Display elements of an array \n" +
+                        "          2. Search the element within array \n" +
+                        "          3. Sort the array the size of the array should be entered by the user.\n" +
+                        "          4. Search for index within array ");
+                num = obj.nextInt();
+
+
+                switch (num) {
+                    case 1:
+                        System.out.println(Arrays.toString(Original_Array7));
+                        break;
+                    case 2:
+
+                        System.out.println("kindly, enter number for search");
+                        num = obj.nextInt();
+
+                        for (int i = 0; i < Original_Array7.length; i++) {
+                            if (Original_Array7[i] == num) {
+                                System.out.println("Found the number " + num);
+                                break;
+                            } else System.out.println("Not found the number " + num);
+                            break;
+
+                        }
+                        break;
+                    case 3:
+                        Arrays.sort(Original_Array7);
+                        System.out.println(Arrays.toString(Original_Array7));
+                        break;
+
+                    case 4:
+
+                        System.out.println("The index your search for is:");
+                        int num2 = obj.nextInt();
+
+                        for (int i = 0; i <= Original_Array7.length; i++) {
+                            if (Original_Array7[num2] == Original_Array7[i]) {
+                                System.out.println("The index is founded");
+                            }
+                            break;
+
+                        }
+
+                    /*case 5:
+                        System.out.println("Program terminated");
+                        break mainLoop;*/
+
+                    /*default:
+                        System.out.println("Wrong choice!!");*/
+
+                }
+                /**/
+            }
+        }
+
+        catch (Exception InputMismatchException)
+        {
+            System.out.println("You Entered wrong input!");
+        }
+
+        ////////////////////////////////////////////////////////////
+
+
+
+
+    }
+}
