@@ -5,73 +5,200 @@ import java.util.Scanner;
 public class Main {
 
     // @author By Aljawhara Alsultan First project
-    public static boolean check( String[][] board, int i, int j){
 
-        if( board [i][j]=="X" ||board [i][j]=="O")
-        {  System.out.println("it is not valid move!");
-        return false;}
-        else   return true;
+    public static void main(String[] args) {
+
+        try {
+
+
+            System.out.println("Project: create a console tic tac toe game that relies on" +
+                    " a random number generator to control the computer turn.");
+
+            Scanner obj = new Scanner(System.in);
+            Random numRand = new Random();
+            int num = 1;
+
+                    // 00       02      04
+            String[][] board = {{"", "|", "", "|", ""},
+                    {"-", "+", "-", "+", "-"},
+                    //20        22       24
+                    {"", "|", "", "|", ""},
+                    {"-", "+", "-", "+", "-"},
+                    //40        42        44
+                    {"", "|", "", "|", ""}};
+
+
+
+            while (num <= 9 && num!=0) {
+
+                PrintBoard(board);
+                System.out.println(" Where do you want to play from (1-9)");
+                num = obj.nextInt();
+
+
+                if(IsEmpty(board,num))
+                {
+                     Turn(board, num, "user");
+                     Iswiner(board);
+                     PrintBoard(board);
+                }
+
+                int postion = numRand.nextInt(9) + 1;
+
+               if(IsEmpty(board,postion))
+                {
+                    System.out.println(" Computer play on position "+ postion);
+                    Turn(board, postion, "Computer");
+                    Iswiner(board);
+                }
+
+               }
+
+        }catch ( Exception InputMismatchException)
+        {
+            System.out.println(" You Entered wrong input");
+
+        }
+
 
     }
 
 
-    public static boolean Iswinner (String[][] board)
+
+    public static boolean IsEmpty( String[][] board, int num){
+        // 00       02      04
+        //20        22      24
+        //40        42      44
+
+        switch (num) {
+
+            case 1:
+                if(board[0][0] =="X"  || board [0][0]=="O" )
+                { System.out.println("it is not valid move!");
+                    return false;
+                }
+
+            case 2:
+                if(board[0][2] == "X"  || board [0][2]=="O" )
+                { System.out.println("it is not valid move!");
+                    return false;  }
+
+            case 3:
+                if(board[0][4] == "X"  || board [0][4]=="O" )
+                { System.out.println("it is not valid move!");
+                    return false;  }
+
+            case 4:
+                if(board[2][0] == "X"  || board [2][0]=="O" )
+                { System.out.println("it is not valid move!");
+                    return false;  }
+
+            case 5:
+                if(board[2][2] == "X"  || board [2][2]=="O" )
+                { System.out.println("it is not valid move!");
+                    return false;  }
+
+            case 6:
+                if(board[2][4] == "X"  || board [2][4]=="O" )
+                { System.out.println("it is not valid move!");
+                    return false;  }
+
+            case 7:
+                if(board[4][0] == "X"  || board [4][0]=="O" )
+                { System.out.println("it is not valid move!");
+                    return false; }
+
+            case 8:
+                if(board[4][2] == "X"  || board [4][2]=="O" )
+                { System.out.println("it is not valid move!");
+                    return false; }
+
+
+            case 9:
+                if(board[4][4] == "X"  || board [4][4]=="O" )
+                { System.out.println("it is not valid move!");
+                    return false; }
+
+        }
+        return true;
+    }
+
+
+
+
+
+    public static boolean Iswiner (String[][] board)
 
     {
 
-                if (board[0][0] == "X" && board[0][2] == "X" && board[0][4] == "X")
-                {System.out.println("You are the winer"); return true;}
+        if (board[0][0] == "X" && board[0][2] == "X" && board[0][4] == "X")
+        {System.out.println("You are the winer");
+            System.exit(0);
+            return true;}
 
-                else  if (board[2][0] == "X" && board[2][2] == "X" && board[2][4] == "X")
-                {System.out.println("You are the winer"); return true;}
+        else  if (board[2][0] == "X" && board[2][2] == "X" && board[2][4] == "X")
+        {System.out.println("You are the winer");                 System.exit(0);
+            return true;}
 
-                else  if (board[4][0] == "X" && board[4][2] == "X" && board[4][4] == "X")
-                {System.out.println("You are the winer"); return true;}
-
-
-                else if (board[0][0] == "X" && board[2][0] == "X" && board[4][0] == "X")
-                {System.out.println("You are the winer"); return true;}
-
-                else if (board[2][0] == "X" && board[2][2] == "X" && board[4][2] == "X")
-                {System.out.println("You are the winer"); return true;}
-
-                else if (board[0][4] == "X" && board[2][4] == "X" && board[4][4] == "X")
-                {System.out.println("You are the winer"); return true;}
+        else  if (board[4][0] == "X" && board[4][2] == "X" && board[4][4] == "X")
+        {System.out.println("You are the winer");                 System.exit(0);
+            return true;}
 
 
-                else if (board[0][0] == "X" && board[2][2] == "X" && board[4][4] == "X")
-                {System.out.println("You are the winer"); return true;}
+        else if (board[0][0] == "X" && board[2][0] == "X" && board[4][0] == "X")
+        {System.out.println("You are the winer");                 System.exit(0);
+            return true;}
 
-                else if (board[0][4] == "X" && board[2][2] == "X" && board[4][0] == "X")
-                {System.out.println("You are the winer"); return true;}
+        else if (board[2][0] == "X" && board[2][2] == "X" && board[4][2] == "X")
+        {System.out.println("You are the winer");                System.exit(0);
+            return true;}
 
-
-
-                else  if (board[0][0] == "O" && board[0][2] == "O" && board[0][4] == "O")
-                {System.out.println("Computer is the winer"); return true;}
-
-                else  if (board[2][0] == "O" && board[2][2] == "O" && board[2][4] == "O")
-                {System.out.println("Computer is the winer"); return true;}
-
-                else  if (board[4][0] == "O" && board[4][2] == "O" && board[4][4] == "O")
-                {System.out.println("Computer is the winer"); return true;}
+        else if (board[0][4] == "X" && board[2][4] == "X" && board[4][4] == "X")
+        {System.out.println("You are the winer");                 System.exit(0);
+            return true;}
 
 
-                else if (board[0][0] == "O" && board[2][0] == "O" && board[4][0] == "O")
-                {System.out.println("Computer is the winer"); return true;}
+        else if (board[0][0] == "X" && board[2][2] == "X" && board[4][4] == "X")
+        {System.out.println("You are the winer");                 System.exit(0);
+            return true;}
 
-                else if (board[2][0] == "O" && board[2][2] == "O" && board[4][2] == "O")
-                {System.out.println("Computer is the winer"); return true;}
+        else if (board[0][4] == "X" && board[2][2] == "X" && board[4][0] == "X")
+        {System.out.println("You are the winer");                System.exit(0);
+            return true;}
 
-                else if (board[0][4] == "O" && board[2][4] == "O" && board[4][4] == "O")
-                {System.out.println("Computer is the winer"); return true;}
+        else  if (board[0][0] == "O" && board[0][2] == "O" && board[0][4] == "O")
+        {System.out.println("Computer is the winer");                 System.exit(0);
+            return true;}
+
+        else  if (board[2][0] == "O" && board[2][2] == "O" && board[2][4] == "O")
+        {System.out.println("Computer is the winer");                 System.exit(0);
+            return true;}
+
+        else  if (board[4][0] == "O" && board[4][2] == "O" && board[4][4] == "O")
+        {System.out.println("Computer is the winer");                 System.exit(0);
+            return true;}
 
 
-                else if (board[0][0] == "O" && board[2][2] == "O" && board[4][4] == "O")
-                {System.out.println("Computer is the winer"); return true;}
+        else if (board[0][0] == "O" && board[2][0] == "O" && board[4][0] == "O")
+        {System.out.println("Computer is the winer");                 System.exit(0);
+            return true;}
 
-                else if (board[0][4] == "O" && board[2][2] == "O" && board[4][0] == "O")
-                {System.out.println("Computer is the winerYou are the winer"); return true;}
+        else if (board[2][0] == "O" && board[2][2] == "O" && board[4][2] == "O")
+        {System.out.println("Computer is the winer");                 System.exit(0);
+            return true;}
+
+        else if (board[0][4] == "O" && board[2][4] == "O" && board[4][4] == "O")
+        {System.out.println("Computer is the winer");                 System.exit(0);
+            return true;}
+
+
+        else if (board[0][0] == "O" && board[2][2] == "O" && board[4][4] == "O")
+        {System.out.println("Computer is the winer");                  System.exit(0);
+            return true;}
+
+        else if (board[0][4] == "O" && board[2][2] == "O" && board[4][0] == "O")
+        {System.out.println("Computer is the winerYou are the winer");    System.exit(0);
+            return true;}
 
 
 
@@ -79,57 +206,48 @@ public class Main {
     }
 
 
-    public static  void ComputerTurn(String[][] board, int num) {
+    public static  void Turn(String[][] board, int num, String type) {
 
+        String sample= "";
 
+        if (type=="user")
+            sample="X";
+        if (type=="Computer")
+            sample="O";
 
         switch (num) {
 
             case 1:
-                if (check(board, 0, 0))
-                    board[0][0] = "O";
+                board[0][0] = sample;
                 break;
-
-
             case 2:
-                if (check(board, 0, 2))
-                    board[0][2] = "O";
+                board[0][2] = sample;
                 break;
-
             case 3:
-                if (check(board, 0, 4))
-                    board[0][4] = "O";
+                board[0][4] = sample;
                 break;
-
-
             case 4:
-                if (check(board, 2, 0))
-                    board[2][0] = "O";
+                board[2][0] = sample;
                 break;
 
             case 5:
-                if (check(board, 2, 2))
-                    board[2][2] = "O";
+                board[2][2] = sample;
                 break;
 
             case 6:
-                if (check(board, 2, 4))
-                    board[2][4] = "O";
+                board[2][4] = sample;
                 break;
 
             case 7:
-                if (check(board, 4, 0))
-                    board[4][0] = "O";
+                board[4][0] = sample;
                 break;
 
             case 8:
-                if (check(board, 4, 2))
-                    board[4][2] = "O";
+                board[4][2] = sample;
                 break;
 
             case 9:
-                if (check(board, 4, 4))
-                    board[4][4] = "O";
+                board[4][4] = sample;
                 break;
 
         }
@@ -138,191 +256,16 @@ public class Main {
     }
 
 
+    public  static  void PrintBoard  (String[][] board)
 
-    public static void main(String[] args) {
+    {
 
-        System.out.println("Project: create a console tic tac toe game that relies on" +
-                            " a random number generator to control the computer turn.");
-
-
-                            // 00       02      04
-        String[][] board = {{"","|","","|",""},
-                             {"-","+","-","+","-"},
-                            //20        22       24
-                             {"","|","","|",""},
-                             {"-","+","-","+","-"},
-                            //40        42        44
-                             {"","|","","|",""}};
-
-
-        int num=0;
-        int Y;
-        int D;
-        Scanner obj= new Scanner(System.in);
-
-
-
-
-
-        mainLoop: while (num<9 || num !=0) {
-
-            for (int i = 0; i <board.length; i++) {
-                for (int j = 0; j < board.length; j++) {
-                    System.out.print(board[i][j] + " ");
-                }
-                System.out.println();
-
+        for (int i = 0; i <board.length; i++) {
+            for (int j = 0; j < board.length; j++) {
+                System.out.print(board[i][j] + " ");
             }
-           // System.out.println(Arrays.toString(board));
-            System.out.println(" Where do you want to play from (1-9)");
-            num= obj.nextInt();
-            Random numRand= new Random();
-            int  postion = numRand.nextInt(9)+1;
+            System.out.println();
 
-
-            switch (num) {
-
-                case 1:
-                    Y=0; D=0;
-                    if(check(board,Y,D))
-                    {   board [Y][D] = "X";
-                        //check if there is a winer
-                        if(Iswinner(board));
-                        {  break mainLoop; }
-
-
-                        //   break mainLoop;
-                    }
-                    System.out.println(" Computer play on "+ postion);
-                    ComputerTurn(board,postion);
-                    break;
-
-
-                case 2:
-                     Y=0; D=2;
-                    if(check(board,Y,D))
-                    {   board [Y][D] = "X";
-                        //check if there is a winer
-                        if(!Iswinner(board));
-                        {  break mainLoop; }
-
-
-                        //   break mainLoop;
-                    }
-                    System.out.println(" Computer play on "+ postion);
-                    ComputerTurn(board,postion);
-                    break;
-
-                case 3:
-                    Y=0; D=4;
-                    if(check(board,Y,D))
-                    {   board [Y][D] = "X";
-                        //check if there is a winer
-                          if(!Iswinner(board));
-                        {  break mainLoop; }
-
-
-                        //   break mainLoop;
-                    }
-                    System.out.println(" Computer play on "+ postion);
-                    ComputerTurn(board,postion);
-                    break;
-
-                case 4:
-                    Y=2; D=0;
-                    if(check(board,Y,D))
-                    {   board [Y][D] = "X";
-                        //check if there is a winer
-                        if(!Iswinner(board));
-                        {  break mainLoop; }
-
-
-                        //   break mainLoop;
-                    }
-                    System.out.println(" Computer play on "+ postion);
-                    ComputerTurn(board,postion);
-                    break ;
-                case 5:
-                    Y=2; D=2;
-                    if(check(board,Y,D))
-                    {   board [Y][D] = "X";
-                        //check if there is a winer
-                        if(!Iswinner(board));
-                        {  break mainLoop; }
-
-
-                        //   break mainLoop;
-                    }
-                    System.out.println(" Computer play on "+ postion);
-                    ComputerTurn(board,postion);
-                 break;
-                case 6:
-                    Y=2; D=4;
-                    if(check(board,Y,D))
-                    {   board [Y][D] = "X";
-                        //check if there is a winer
-                        if(!Iswinner(board));
-                        {  break mainLoop; }
-
-
-                        //   break mainLoop;
-                    }
-                    System.out.println(" Computer play on "+ postion);
-                    ComputerTurn(board,postion);
-                    break;
-                case 7:
-                    Y=4; D=0;
-                    if(check(board,Y,D))
-                    {   board [Y][D] = "X";
-                        //check if there is a winer
-                        if(!Iswinner(board));
-                        {  break mainLoop; }
-
-
-                        //   break mainLoop;
-                    }
-                    System.out.println(" Computer play on "+ postion);
-                    ComputerTurn(board,postion);
-                    break;
-                case 8:
-                    Y=4; D=2;
-                    if(check(board,Y,D))
-                    {   board [Y][D] = "X";
-                        //check if there is a winer
-                        if(!Iswinner(board));
-                        {  break mainLoop; }
-
-
-                        //   break mainLoop;
-                    }
-                    System.out.println(" Computer play on "+ postion);
-                    ComputerTurn(board,postion);
-                    break;
-
-                case 9:
-                    Y=4; D=4;
-                    if(check(board,Y,D))
-                    {   board [Y][D] = "X";
-                        //check if there is a winer
-                        if(!Iswinner(board));
-                        {  break mainLoop; }
-
-
-                        //   break mainLoop;
-                    }
-                    System.out.println(" Computer play on "+ postion);
-                    ComputerTurn(board,postion);
-                    break;
-
-
-
-                default:
-                    System.out.println("Wrong choice!!");
-
-            }
         }
-
-
-
     }
 }
