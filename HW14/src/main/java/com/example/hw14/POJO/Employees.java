@@ -15,7 +15,7 @@ public class Employees {
     @Min(2)
     private int id;
     @NotEmpty(message = "Name should be not Empty")
-    @Size(min=3, message = "Employees ID should be more than 3")
+    @Size(min=4, message = "Employees name should be more than 3")
 
     private String name;
     @NotNull(message = "age should be not null")
