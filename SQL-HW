@@ -1,0 +1,78 @@
+#1. Create the above database as shown in the image
+#2. Connect tables using foreign keys when applicable
+#3. Add the following constraints to each tables
+#DDL---------------------------------------------
+
+create database Store;
+
+Create table countries(
+code int primary key,
+name varchar(20) unique,
+continent_name varchar(20) not null
+);
+
+Create table Users (
+   id int primary key ,
+   full_name varchar(20),
+   email varchar(20) unique,
+   gender char(1) check( gender='M' or gender = 'F' ),
+   date_of_birth varchar(15),
+   created_at datetime DEFAULT   CURRENT_TIMESTAMP,
+   country_code int, foreign key(country_code) references countries(code)
+);
+
+
+Create table orders(
+id int primary key ,
+user_id int, foreign key (user_id) references Users(id),
+status varchar(6) check( status='start' or status = 'finish' ) ,
+created_at datetime DEFAULT   CURRENT_TIMESTAMP
+);
+
+Create table products(
+
+id int primary key,
+name varchar(10) not null,
+price int default 0 ,
+status varchar(10) check( status='valid' or status = 'expired' ) ,
+created_at datetime DEFAULT   CURRENT_TIMESTAMP
+);
+
+
+Create table order_products(
+
+order_id int, foreign key(order_id) references orders(id),
+product_id int, foreign key(product_id) references orders(id),
+quantity int default 0
+);
+
+
+# 4. Write the DML commands for the following instructions ( choose data randomly )
+# DML ----------------------------------------
+
+#( DML - Insert )Add new row to the countries table.
+
+insert into countries values ('123','Riyadh','KSA');
+
+#( DML - Insert )Add new row to the users table.
+insert into Users (id,full_name,email,gender,date_of_birth,country_code)
+values ('01','Aljawhar','Alj@hotmail.com','F','13-Feb','123');
+
+#( DML - Insert )Add new row to the orders table.
+insert into orders (id,user_id,status)
+    values ('01','01','start');
+#( DML - Insert )Add new row to the products table.
+
+insert into products (id, name, price, status)
+    values ('03','omiga3','40','valid');
+
+#( DML - Insert )Add new row to the order_products table.
+insert into  order_products (order_id, product_id, quantity)
+values ('011','03','4');
+
+#(DML - Update)Update row from countries table.
+update countries set code='111' where code='123';
+
+#(DML - Delete)Delete row from products table.
+delete from products where id='03';
+
