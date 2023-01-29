@@ -42,7 +42,7 @@ public class UserController {
         }
 
         @PutMapping("/user/{index}")
-        public ResponseEntity updateCategory(@Valid @RequestBody User userobj,@PathVariable int index,Errors errors)
+        public ResponseEntity updateUser(@Valid @RequestBody User userobj,@PathVariable int index,Errors errors)
         {
             if (errors.hasErrors()) {
                 String message = errors.getFieldError().getDefaultMessage();
@@ -53,7 +53,7 @@ public class UserController {
         }
 
         @DeleteMapping ("/user/{index}")
-        public ResponseEntity deleteCategory(@PathVariable int index,Errors errors)
+        public ResponseEntity deleteUser(@PathVariable int index,Errors errors)
         {
             if (errors.hasErrors()) {
                 String message = errors.getFieldError().getDefaultMessage();
@@ -63,6 +63,35 @@ public class UserController {
             return ResponseEntity.status(200).body("Category Deleted!!");
         }
 
+    @PostMapping("/addstock/{merchid}/{idproduct}/{quantity}")
+    public ResponseEntity addToStock(@Valid @RequestBody int userid,@PathVariable int quantity,@PathVariable int idproduct,@PathVariable int merchid, Errors errors)
+    {
+
+        if (errors.hasErrors()) {
+            String message = errors.getFieldError().getDefaultMessage();
+            return ResponseEntity.status(400).body(message);
+        }
+
+        userService.addProductToStock(idproduct,merchid,userid,quantity);
+      //  userService.addUser(userobj);
+        return ResponseEntity.status(200).body(" add to stock!!");
+
+    }
+
+
+    @PostMapping("/addcart/{userid}/{idproduct}/{merchid}/{quantity}")
+    public ResponseEntity addToCart(@PathVariable int userid,@PathVariable int quantity,@PathVariable int idproduct,@PathVariable int merchid, Errors errors)
+    {
+
+        if (errors.hasErrors()) {
+            String message = errors.getFieldError().getDefaultMessage();
+            return ResponseEntity.status(400).body(message);
+        }
+
+       userService.BuyProduct(userid,idproduct,merchid,quantity);
+        return ResponseEntity.status(200).body(" add to cart , User has the prod!!");
+
+    }
 
 
 
