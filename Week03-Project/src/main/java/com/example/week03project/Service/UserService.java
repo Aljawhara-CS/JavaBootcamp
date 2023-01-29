@@ -115,7 +115,7 @@ public class UserService {
     }
 
 
-    public boolean BuyProduct(int userid , long productid , int merchantid, int quantity)
+ public boolean BuyProduct(int userid , int productid , int merchantid, int quantity)
     {
        /* Create endpoint where user can buy a product directly
         this endpoint should accept userid , product id , merchantid.
@@ -133,31 +133,24 @@ public class UserService {
         for (int i=0; i<merchantStocks.size(); i++)
 
         {
-            if (merchantStocks.get(i).getMerchantid()==merchantid)
+            if (merchantStocks.get(i).getMerchantid()==merchantid && merchantStocks.get(i).getProductid()==productid)
             {
-             //   int size = Count(merchants.get(merchantid).getProductid());
-                for (int j=i;j<= products.size();j++)
 
-                      //  merchants.get(merchantid).getProductid();j++)
-                       // product.size();j++)
+                    if (merchantStocks.get(i).getStock()>=quantity)
                     {
-
-                    if ((merchantStocks.get(j).getProductid() == productid) && (merchantStocks.get(j).getStock()>=quantity))
-                    {
-                        MerchantStock obj= new MerchantStock(j,productid,merchantid,(merchantStocks.get(j).getStock()-quantity));
-                        totalPrice= products.get(j).getPrice()*quantity;
+                        MerchantStock obj= new MerchantStock(i,productid,merchantid,(merchantStocks.get(i).getStock()-quantity));
+                        totalPrice= products.get(productid).getPrice()*quantity;
                        if(users.get(userid).getBalance() >= totalPrice) //ID user
                        {
-                           newBalance= users.get(j).getBalance()-totalPrice;
+                           newBalance= users.get(userid).getBalance()-totalPrice;
 
-                           merchantStocks.set(j,obj); //update stock
+                           merchantStocks.set(i,obj); //update stock
                            users.get(userid).setBalance(newBalance); //update balance
                            return true;
 
                        }
                        else return false;
                     } else return false;
-                }//End inner loop
             }// End if
         }// End first loop
         return  false;
