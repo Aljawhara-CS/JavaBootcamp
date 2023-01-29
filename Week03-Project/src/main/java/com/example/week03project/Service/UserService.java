@@ -22,12 +22,16 @@ public class UserService {
     private final ProductService product;
     private final MerchantStockService merchantStockServiceobj;
     private  final  MerchantService  merchantService;
+    private  final UserService user;
+
+
 
 
     ArrayList<Product> products = product.getProducts();
     ArrayList<MerchantStock> merchantStocks = merchantStockServiceobj.getMerchantStocks();
     ArrayList<Merchant> merchants=merchantService.getMerchants();
-    ArrayList<User> users= new ArrayList<>();
+
+    ArrayList<User> users= user.getUsers();
 
 
 
@@ -69,11 +73,11 @@ public class UserService {
 
     }
 
-    public boolean addProductToStock(Product prodobj , MerchantStock merchobj, User user, char merchantid ) // int quantity,
+    public boolean addProductToStock(int prodid , int merchid, int userid, int quantity)
     {
 
 
-        if(user.getRole().equals("Admin")) // authentication
+        if(users.get(userid).getRole().equals("Admin")) // authentication
 
         {
             // Update Stock
@@ -81,16 +85,20 @@ public class UserService {
             for (int i=0; i<merchantStocks.size(); i++)
 
             {
-                if (merchantStocks.get(i).getId()==merchobj.getId())
+                if (merchantStocks.get(i).getId()==merchid && merchantStocks.get(i).getId()==prodid)
                 {
 
-                    merchantStocks.set(i,merchobj);
+                    //merchantStocks.set(i,merchobj);
+                    long id = merchantStocks.size()+1;
+
+                    MerchantStock obj = new MerchantStock(id,prodid,merchid,quantity);
+                    merchantStockServiceobj.editMerchantStock(obj,i);
                     return true;
                 }
 
             }
 
-            // First time to add Product to Stock
+/*            // First time to add Product to Stock
 
             for (int i=0; i<products.size(); i++)
             {
@@ -105,7 +113,7 @@ public class UserService {
                    return true;
 
                }
-            }
+            }*/
 
 
         }
@@ -115,7 +123,7 @@ public class UserService {
     }
 
 
- public boolean BuyProduct(int userid , int productid , int merchantid, int quantity)
+    public boolean BuyProduct(int userid , int productid , int merchantid, int quantity)
     {
        /* Create endpoint where user can buy a product directly
         this endpoint should accept userid , product id , merchantid.
