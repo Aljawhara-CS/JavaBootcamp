@@ -1,5 +1,6 @@
 package com.example.hw17.Service;
 
+import com.example.hw17.Exception.ApiException;
 import com.example.hw17.Repostry.UserRepository;
 import com.example.hw17.Model.User;
 import lombok.AllArgsConstructor;
@@ -24,13 +25,14 @@ public class UserService {
 
     }
 
-    public  boolean updateUser(User user, Integer id) {
+    public  void updateUser(User user, Integer id) {
 
 
-        User olduser = userRepository.getById(id);
+        User olduser = userRepository.findUserbyId(id);
 
         if (olduser==null)
-        {  return false;}
+        {          throw new ApiException(" User not found");
+        }
 
      //   olduser.setId(user.getId());
         olduser.setRole(user.getRole());
@@ -41,19 +43,71 @@ public class UserService {
 
 
         userRepository.save(olduser);
-        return true;
     }
 
-    public  boolean deleteUser(Integer id)
+    public  void deleteUser(Integer id)
     {
 
-    User olduser = userRepository.getById(id);
+    User olduser = userRepository.findUserbyId(id);
 
         if (olduser!=null)
-        { userRepository.deleteById(id);
-        return true;
+        {
+            userRepository.deleteById(id);
+        //return true;
+
         }
-        return false;
+        //return false;
+
+        throw new ApiException(" User not found");
+
+    }
+
+    public List<User>  findUserByRole( String role)
+    {
+        List<User>  user= userRepository.findUserByRole(role);
+        if(user==null)
+        {
+            throw new ApiException(" User not found");
+        }
+
+        return user;
+
+    }
+
+    public User findUserByEmail( String email)
+    {
+        User user= userRepository.findUserByEmail(email);
+        if(user==null)
+        {
+            throw new ApiException(" User not found");
+        }
+
+        return user;
+
+    }
+
+   public List<User> findUsersByAge( Integer age)
+    {
+        List<User> user= userRepository.findUsersByAge(age);
+        if(user==null)
+        {
+            throw new ApiException(" User not found");
+        }
+
+        return user;
+
+    }
+
+    public User findUsersByUsernameAndPassword( String username, String password )
+    {
+        User user= userRepository.findUsersByUsernameAndPassword(username,password);
+        if(user==null)
+        {
+            throw new ApiException(" Password or Username not correct!");
+        }
+
+        return user;
+
     }
 
 

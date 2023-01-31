@@ -24,6 +24,12 @@ public class User {
     @Column(columnDefinition = "varchar(30) not null unique")
     @Size(min = 4, max=30)
     private String name;
+
+    @Column(columnDefinition = "varchar(30) not null unique")
+    @Size(min = 4, max=30)
+
+    private String username;
+
     @Email
     @Column(columnDefinition = "varchar(30) not null unique" )
     private String email;
