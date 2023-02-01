@@ -30,7 +30,7 @@ public class PatientService {
 
 
     public void updatePatient( Patient patient, Integer id) {
-        Patient old = patientRepository.findByInsuranceId(id);
+        Patient old = patientRepository.findPatientByPatientId(id);
 
         if (old == null)
         {
@@ -59,7 +59,7 @@ public class PatientService {
 
     {
 
-        Patient old = patientRepository.findByInsuranceId(id);
+        Patient old = patientRepository.findPatientByPatientId(id);
         if(old!=null)
         {
          patientRepository.deleteById(id);
