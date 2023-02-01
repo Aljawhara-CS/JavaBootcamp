@@ -1,0 +1,13 @@
+package com.example.central_pharmacy.Repository;
+
+import com.example.central_pharmacy.Model.Patient;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+
+public interface PatientRepository extends JpaRepository <Patient,Integer> {
+
+
+    Patient findByInsuranceId(Integer id);
+}
