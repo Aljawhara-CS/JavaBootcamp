@@ -30,7 +30,7 @@ public class Request {
     @Column(columnDefinition = "varchar(20) not null")
     @Pattern(regexp="(rush|normal)")
     private  String emergencyLevel;// rush, normal
-    @Column(columnDefinition = "double not null")
+    @Column(columnDefinition = "double  null")
     private double totalPrice;//  will be null then will reflect from medicine price
     @Column(columnDefinition = "varchar(20) not null")
     @Pattern(regexp="(waiting|rejected|approved|scheduled|delivered)")
