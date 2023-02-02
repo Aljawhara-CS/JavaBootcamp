@@ -43,8 +43,9 @@ public class Patient {
     @Column(columnDefinition = "double not null")
     private double balance;
 
-
-    private String StartDate;
-    private String lastDate;
+   @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MM/dd/yyyy")
+    private Date StartDate;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MM/dd/yyyy")
+    private Date lastDate;
 
 }
