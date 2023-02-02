@@ -3,6 +3,7 @@ package com.example.central_pharmacy.Service;
 import com.example.central_pharmacy.Exception.ApiException;
 import com.example.central_pharmacy.Model.Link;
 import com.example.central_pharmacy.Model.Medicine;
+import com.example.central_pharmacy.Model.Patient;
 import com.example.central_pharmacy.Model.Request;
 import com.example.central_pharmacy.Repository.LinkRepository;
 import com.example.central_pharmacy.Repository.MedicineRepository;
@@ -19,7 +20,9 @@ public class RequestService {
 
     private final RequestRepository requestRepository;
     private  final MedicineRepository medicineRepository;
-    private  final LinkRepository linkRepository;
+
+    private final LinkRepository linkRepository;
+    private  final PatientService patientService;
 
 
     public List<Request> getRequest(){
@@ -61,25 +64,63 @@ public class RequestService {
 
     }
 
-   /* public void total_price(Integer requestId){
+    public void totalPrice( Integer requestId){
+
+        Medicine itemPrice;
         Request updated = requestRepository.findRequestById(requestId);
+        double total=0.0;
 
         if (updated==null) {
             throw new ApiException(" Request not found");
 
         }
-        List<Link> links = linkRepository.findAllByRequestId(updated.getId());
 
-        for(int i=0; links.size(); i++ )
 
-        Medicine itemPrice=  medicineRepository.findMedicineById(i);
-        updated.setTotalPrice(itemPrice.getPrice());
+      //  List<Link> links = linkRepository.findAllByRequestId(updated.getId());
+        Link link = linkRepository.findByRequestId(updated.getId());
 
+    //    for(int i=0; links.; i++ )
+    //    {
+
+
+            itemPrice=  medicineRepository.findMedicineById(link.getMedicineId());
+
+            total= total+ itemPrice.getPrice();
+
+
+       //  }
+
+        updated.setTotalPrice(total);
+
+    }
+
+
+    public void checkStatus(Integer id)
+    {
+        Request request = requestRepository.findRequestById(id);
+        if (request==null) {
+            throw new ApiException(" Request not found");
+        }
+        int patientId= request.getPatientId();
+        int MedicineId= request.getMedicineId();
+
+        Patient patient= patientService.patientRepository.findPatientByPatientId(patientId);
+        Medicine medicine= medicineRepository.findMedicineById(MedicineId);
+
+        if(medicine.getQuantity()>=request.getQuantity())
+        {
+            if (medicine.getPrice() >= patient.getBalance())
+                request.setStatus("approved");
+
+        }
+
+        throw new ApiException("No balance or quantity !");
 
 
     }
 
-*/
+
+
 
 
     }
