@@ -41,6 +41,19 @@ public class RequestController {
 
             requestService.deleteRequest(id);
             return ResponseEntity.status(200).body("Request Deleted");}
+        
+        
+    @PutMapping("/price/{id}")
+    public ResponseEntity updatePrice(@PathVariable Integer id){
+        requestService.totalPrice(id);
+        return ResponseEntity.status(200).body("Price Updated ");
+    }
+
+    @PutMapping("/check/{id}")
+    public ResponseEntity check(@PathVariable Integer id){
+        requestService.checkStatus(id);
+        return ResponseEntity.status(200).body("Request Approved");
+    }
 
 
 
