@@ -91,13 +91,14 @@ public class TeacherController {
 
     }
 
-    @GetMapping("/get/{id}")
+   @GetMapping("/get/{id}")
     public ResponseEntity getTeacherDetails(@PathVariable Integer id)
     {
-        Address address= teacherService.getTeacherDetails(id);
-        return  ResponseEntity.status(200).body(address);
+        Teacher teacher=teacherService.getTeacherDetails(id);
+        return  ResponseEntity.status(200).body(teacher);
 
     }
+
 
 
 
