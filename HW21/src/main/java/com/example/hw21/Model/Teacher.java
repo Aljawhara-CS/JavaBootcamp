@@ -33,7 +33,7 @@ public class Teacher {
 
 
 
-    @OneToOne( cascade = CascadeType.ALL, mappedBy="address")
+    @OneToOne( cascade = CascadeType.ALL, mappedBy="teacher")
     @PrimaryKeyJoinColumn
     private Address address;
 
