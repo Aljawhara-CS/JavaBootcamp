@@ -64,19 +64,19 @@ public class TeacherService {
 
    // Create endpoint that takes teacher id and return All teacher details
 
-    public  Address  getTeacherDetails (Integer id)
+    public  Teacher  getTeacherDetails (Integer id)
     {
-        Teacher found= teacherRepository.findTeacherById(id);
-        if(found==null)
+        Teacher teacher= teacherRepository.findTeacherById(id);
+        Address address= addressRepository.findAddressById(id);
+
+        if(teacher==null || address==null)
         {
-                     throw new ApiException(" Teacher not found");
+                     throw new ApiException(" id not found");
         }
 
-       Address address= addressRepository.findAddressById(id);
-
-        return  address;
-
-
+        //address.setTeacher(teacher);
+        teacher.setAddress(address);
+        return  teacher;
 
 
     }
