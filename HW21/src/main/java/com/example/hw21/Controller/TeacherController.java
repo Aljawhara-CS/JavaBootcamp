@@ -2,8 +2,10 @@ package com.example.hw21.Controller;
 
 import com.example.hw21.DTO.AddressDTO;
 import com.example.hw21.Model.Address;
+import com.example.hw21.Model.Course;
 import com.example.hw21.Model.Teacher;
 import com.example.hw21.Service.AddressService;
+import com.example.hw21.Service.CourseService;
 import com.example.hw21.Service.TeacherService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +22,7 @@ public class TeacherController {
 
     private final TeacherService teacherService;
     private final AddressService addressService;
+    private  final CourseService courseService;
 
 
     @GetMapping("/get")
@@ -28,6 +31,22 @@ public class TeacherController {
         List<Teacher> teachers= teacherService.getTeachers();
         return  ResponseEntity.status(200).body(teachers);
 
+    }
+
+    @GetMapping("/get/{id}")
+    public ResponseEntity getTeacherDetails(@PathVariable Integer id)
+    {
+        Teacher teacher=teacherService.getTeacherDetails(id);
+        return  ResponseEntity.status(200).body(teacher);
+
+    }
+
+    @PostMapping("/get/course")
+    public ResponseEntity getCourse()
+
+    {
+        List<Course> course = courseService.getCourses();
+        return ResponseEntity.status(200).body(course);
     }
 
     @PostMapping("/add")
@@ -51,8 +70,33 @@ public class TeacherController {
 
     }
 
+    @PostMapping("/add/course")
+    public ResponseEntity addCourse(@Valid @RequestBody Course course)
+
+    {
+
+
+        courseService.addCourse(course);
+        return ResponseEntity.status(200).body(" course Added!");
+
+    }
+
+
+    @PostMapping("/add/course/{idtech}/{idcour}")
+    public ResponseEntity assignTechWithCou(@PathVariable Integer idcour, @PathVariable Integer idtech)
+    {
+
+        courseService.assignTechWithCou(idtech,idcour);
+        return ResponseEntity.status(200).body(" Done, Course Linked with Teacher!");
+
+
+
+    }
+
+
+
     @PutMapping("/update/{id}")
-    public ResponseEntity updateTeacherAddress(@Valid @RequestBody Teacher teacher,@PathVariable Integer id)
+    public ResponseEntity updateTeacher(@Valid @RequestBody Teacher teacher,@PathVariable Integer id)
 
     {
 
@@ -70,6 +114,16 @@ public class TeacherController {
         return ResponseEntity.status(200).body(" Teacher Address Updated!");
 
     }
+    @PutMapping("/update/course/{id}")
+    public ResponseEntity updateCourse( @PathVariable Integer id,@Valid @RequestBody Course course)
+
+    {
+        courseService.updateCourse(id,course);
+        return ResponseEntity.status(200).body(" Course Updated!");
+
+    }
+
+
 
     @DeleteMapping("/delete/address/{id}")
     public ResponseEntity DeleteTeacherAddress(@PathVariable Integer id)
@@ -91,16 +145,26 @@ public class TeacherController {
 
     }
 
-   @GetMapping("/get/{id}")
-    public ResponseEntity getTeacherDetails(@PathVariable Integer id)
+    @DeleteMapping("/delete/course/{id}")
+    public ResponseEntity DeleteCourse(@PathVariable Integer id)
+
     {
-        Teacher teacher=teacherService.getTeacherDetails(id);
-        return  ResponseEntity.status(200).body(teacher);
+
+        courseService.deleteCourse(id);
+        return ResponseEntity.status(200).body("Course Deleted!");
 
     }
 
 
+    @GetMapping("/get/course/{id}")
+    public ResponseEntity getTeacherName(@PathVariable Integer id)
+    {
 
+        String name=  courseService.howIsTeacher(id);
+        return ResponseEntity.status(200).body(name);
+
+
+    }
 
 
 

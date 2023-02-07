@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.*;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -17,7 +19,6 @@ public class Teacher {
     //id , name , age , email , salary ( Add all required validation )
 
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    @Column(columnDefinition = "int not null")
     @Id
     private Integer id;
 
@@ -36,6 +37,9 @@ public class Teacher {
     @OneToOne( cascade = CascadeType.ALL, mappedBy="teacher")
     @PrimaryKeyJoinColumn
     private Address address;
+
+    @OneToMany(cascade= CascadeType.ALL, mappedBy="teacher")
+    private List  <Course> courses;
 
 
 

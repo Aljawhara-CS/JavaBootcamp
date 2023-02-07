@@ -3,8 +3,10 @@ package com.example.hw21.Service;
 
 import com.example.hw21.Exception.ApiException;
 import com.example.hw21.Model.Address;
+import com.example.hw21.Model.Course;
 import com.example.hw21.Model.Teacher;
 import com.example.hw21.Repostry.AddressRepository;
+import com.example.hw21.Repostry.CourseRepository;
 import com.example.hw21.Repostry.TeacherRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -19,6 +21,8 @@ public class TeacherService {
 
     public final TeacherRepository teacherRepository;
     public final AddressRepository addressRepository;
+    public final CourseRepository courseRepository;
+
 
 
     public List<Teacher> getTeachers()
@@ -74,12 +78,33 @@ public class TeacherService {
                      throw new ApiException(" id not found");
         }
 
-        //address.setTeacher(teacher);
         teacher.setAddress(address);
         return  teacher;
 
 
     }
+
+    //Create endpoint that takes teacher id and return All teacher details
+
+
+
+    public  Teacher getTeacherInfo( Integer id)
+    {
+
+        Teacher teacher= teacherRepository.findTeacherById(id);
+
+        if(teacher==null)
+        {
+            throw new ApiException(" id not found");
+        }
+
+        return teacher;
+
+    }
+
+
+
+
 
 
 
