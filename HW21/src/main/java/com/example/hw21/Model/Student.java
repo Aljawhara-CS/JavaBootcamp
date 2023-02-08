@@ -1,6 +1,5 @@
 package com.example.hw21.Model;
 
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -14,27 +13,20 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 
-public class Course {
+public class Student {
 
-    //Course Class :
-    //
-    //id , name ( all should not be empty )
+
+  //  Student Class : ID , name , age , major ( all should not be empty )
+
 
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Id
     private Integer id;
-
-    @Column(columnDefinition = "varchar(20) not null")
     private String name;
-    @ManyToOne
-    @JoinColumn(name ="teacher_id", referencedColumnName = "id")
+    private String age;
+    private String major;
+
+    @ManyToMany
     @JsonIgnore
-    private Teacher teacher;
-
-    @ManyToMany(cascade= CascadeType.ALL, mappedBy="course")
-    private List<Student> students;
-
-
-
-
+    private List<Course> course;
 }

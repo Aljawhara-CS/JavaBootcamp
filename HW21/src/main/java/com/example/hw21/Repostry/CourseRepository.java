@@ -9,5 +9,6 @@ import org.springframework.stereotype.Repository;
 public interface CourseRepository extends JpaRepository<Course,Integer> {
 
     Course findCourseById(Integer id);
-    //Course findCourseBy
+   // Course findCoursesByStudents
+
 }

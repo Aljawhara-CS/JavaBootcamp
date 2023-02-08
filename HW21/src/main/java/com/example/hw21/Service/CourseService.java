@@ -2,12 +2,15 @@ package com.example.hw21.Service;
 
 import com.example.hw21.Exception.ApiException;
 import com.example.hw21.Model.Course;
+import com.example.hw21.Model.Student;
 import com.example.hw21.Model.Teacher;
 import com.example.hw21.Repostry.CourseRepository;
+import com.example.hw21.Repostry.StudentRepository;
 import com.example.hw21.Repostry.TeacherRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -17,6 +20,8 @@ public class CourseService {
 
     private final CourseRepository courseRepository;
     private final TeacherRepository teacherRepository;
+
+    private final StudentRepository studentRepository;
 
 
 
@@ -92,5 +97,54 @@ public class CourseService {
 
     }
 
+
+    public void assignStudentWithCourse(Integer student_id, Integer Course_id)
+    {
+
+        Student student= studentRepository.findStudentById(student_id);
+        Course course= courseRepository.findCourseById(Course_id);
+        if (student==null || course==null)
+        {
+            throw new ApiException(" Can not Assigned, Objects not found  ");
+
+        }
+
+        student.getCourse().add(course);
+        course.getStudents().add(student);
+        studentRepository.save(student);
+        courseRepository.save(course);
+
+
+    }
+
+    //Create endpoint that takes class id and return the student list
+    public List<Student> getStudentListbyCourseId(Integer courseId)
+
+    {
+
+      Course course= courseRepository.findCourseById(courseId);
+      List<Student> student= new ArrayList<>();
+
+
+
+        if(course==null)
+        {
+            throw new ApiException("  not found  ");
+
+        }
+
+
+        for (int i=0; i<course.getStudents().size();i++) {
+
+            student.add(course.getStudents().get(i));
+
+        }
+
+        return student;
+
+
+
+
+    }
 
 }

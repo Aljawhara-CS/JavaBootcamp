@@ -3,9 +3,11 @@ package com.example.hw21.Controller;
 import com.example.hw21.DTO.AddressDTO;
 import com.example.hw21.Model.Address;
 import com.example.hw21.Model.Course;
+import com.example.hw21.Model.Student;
 import com.example.hw21.Model.Teacher;
 import com.example.hw21.Service.AddressService;
 import com.example.hw21.Service.CourseService;
+import com.example.hw21.Service.StudentService;
 import com.example.hw21.Service.TeacherService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +25,7 @@ public class TeacherController {
     private final TeacherService teacherService;
     private final AddressService addressService;
     private  final CourseService courseService;
+    private  final StudentService studentService;
 
 
     @GetMapping("/get")
@@ -47,6 +50,14 @@ public class TeacherController {
     {
         List<Course> course = courseService.getCourses();
         return ResponseEntity.status(200).body(course);
+    }
+
+    @PostMapping("/get/student")
+    public ResponseEntity getStudent()
+
+    {
+        List<Student> students = studentService.getStudents();
+        return ResponseEntity.status(200).body(students);
     }
 
     @PostMapping("/add")
@@ -81,6 +92,27 @@ public class TeacherController {
 
     }
 
+    @PostMapping("/add/student")
+    public ResponseEntity addStudent(@Valid @RequestBody Student student)
+
+    {
+
+       studentService.addStudent(student);
+        return ResponseEntity.status(200).body(" Student Added!");
+
+    }
+
+
+    @PostMapping("/add/student/{studentid}/{idcour}")
+    public ResponseEntity assignStudentWithCourse(@PathVariable Integer studentid, @PathVariable Integer idcour)
+    {
+
+       courseService.assignStudentWithCourse(studentid,idcour);
+        return ResponseEntity.status(200).body(" Done, Course Linked with Student in both way!");
+
+
+
+    }
 
     @PostMapping("/add/course/{idtech}/{idcour}")
     public ResponseEntity assignTechWithCou(@PathVariable Integer idcour, @PathVariable Integer idtech)
@@ -123,6 +155,15 @@ public class TeacherController {
 
     }
 
+    @PutMapping("/update/student/{id}")
+    public ResponseEntity updateStudent( @PathVariable Integer id,@Valid @RequestBody Student student)
+
+    {
+
+        studentService.UpdateStudent(student,id);
+        return ResponseEntity.status(200).body(" Student Updated!");
+
+    }
 
 
     @DeleteMapping("/delete/address/{id}")
@@ -155,6 +196,16 @@ public class TeacherController {
 
     }
 
+    @DeleteMapping("/delete/student/{id}")
+    public ResponseEntity DeleteStudent(@PathVariable Integer id)
+
+    {
+
+        studentService.DeleteStudent(id);
+        return ResponseEntity.status(200).body("student Deleted!");
+
+    }
+
 
     @GetMapping("/get/course/{id}")
     public ResponseEntity getTeacherName(@PathVariable Integer id)
@@ -165,6 +216,31 @@ public class TeacherController {
 
 
     }
+
+    @PutMapping("/update/student/{newmajor}/{id}")
+    public ResponseEntity ChangeStudentMajor(@PathVariable Integer id, @PathVariable String newmajor)
+
+    {
+
+        studentService.ChangeStudentMajor(id,newmajor);
+        return ResponseEntity.status(200).body("Done!");
+
+
+    }
+
+
+    @GetMapping("/get/student/{id}")
+
+    public ResponseEntity getStudentListbyCourseId(@PathVariable Integer id)
+    {
+
+        List<Student> students = courseService.getStudentListbyCourseId(id);
+        return ResponseEntity.status(200).body(students);
+
+
+    }
+
+
 
 
 
