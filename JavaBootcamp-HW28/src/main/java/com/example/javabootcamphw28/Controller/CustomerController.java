@@ -34,6 +34,15 @@ public class CustomerController {
         return ResponseEntity.status(200).body("User registered!");
 
     }
+    
+    @PostMapping("/login")
+    public ResponseEntity login()
+    {
+
+
+        return ResponseEntity.status(200).body("logedin User ");
+
+    }
 
     @PutMapping("/{id}")
     public ResponseEntity updateUser(@Valid @RequestBody Customer Customer, @PathVariable Integer id){
