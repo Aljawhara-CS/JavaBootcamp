@@ -41,6 +41,7 @@ public class CustomerService {
 
     public void register(Customer myUser) {
        String hashedPassword=new BCryptPasswordEncoder().encode(myUser.getPassword());
+        myUser.setRole("CUSTOMER");
         myUser.setPassword(hashedPassword);
         customerRepository.save(myUser);
     }
